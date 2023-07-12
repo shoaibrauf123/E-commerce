@@ -23,4 +23,13 @@ Route::controller(AdminController::class)->prefix("admin")->group(function(){
     Route::post("login","login")->name("admin.login");
     Route::get("logout","logout")->name("admin.logout");
 
+    // categories Route Start 
+        Route::get("category","category")->name("admin.category");
+        Route::post("add-category","add_category")->name("admin.addCategory");
+        Route::post("update-category/{id}","update_category")->name("admin.updateCategory");
+        Route::get("delete-category/{id}","delete_category")->name("admin.deleteCategory");
+
+    // categorires Route End
+
+
 });
