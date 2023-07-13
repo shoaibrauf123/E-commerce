@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Product;
+use App\Models\ContactUs;
 //use App\Models\Admin;
 
 
@@ -41,8 +43,10 @@ class AdminController extends Controller
             return redirect()->route("admin.loginForm")->with("success","Logout Successfully");
         }
     }
+
+    // Start category Method
     public function category(){
-        $category = Category::paginate(5);
+        $category = Category::orderBy("id","desc")->paginate(5);
         //dd($category);
         return view("admin.category.category",[
                 "category" => $category,
@@ -60,7 +64,7 @@ class AdminController extends Controller
         $result = $category->save();
         if($result){
             return redirect()->route("admin.category")->with("success","Category Successfully Added.");
-          }
+        }
     }
     public function update_category(Request $req,$id){
         $req->validate([
@@ -82,4 +86,76 @@ class AdminController extends Controller
             return redirect()->route("admin.category")->with("success","Category Successfully Deleted.");
         }
     }
+    // End Category Methods
+
+    // Start Product Method
+
+    public function product(){
+        $product = Product::paginate(5);
+        return view("admin.product.product",[
+            "product" => $product,
+        ]);
+    }
+    public function product_form(){
+        $category = Category::all();
+        return view("admin.product.productForm",[
+            "category" => $category,
+        ]);
+    }
+    // End Product Method
+
+    // Start Contact Us Method
+    public function contact_us(){
+        $contact_us = ContactUs::orderBy("id","desc")->paginate(5);
+        return view("admin.contact_us.contact_us",[
+            "contact_us" => $contact_us,
+        ]);
+    }
+    // public function add_contact_us(Request $req){
+    //     $req->validate([
+    //         "name" => "required",
+    //         "email" => "required",
+    //         "mobile" => "required",
+    //         "comment" => "required",
+    //     ]);
+    //     $contact_us = new ContactUs;
+    //     $contact_us->name = $req->name;
+    //     $contact_us->email = $req->email;
+    //     $contact_us->mobile = $req->mobile;
+    //     $contact_us->comment = $req->comment;
+    //     $result = $contact_us->save(); 
+    //     if($result){
+    //         return redirect()->route("admin.contactUs")->with("success","Contact Us Successfully Added.");
+    //     }
+
+    // }
+
+    // public function update_contact_us(Request $req,$id){
+    //     $req->validate([
+    //         "name" => "required",
+    //         "email" => "required",
+    //         "mobile" => "required",
+    //         "comment" => "required",
+    //     ]);
+
+    //     $contact_us = ContactUs::find($id);
+    //     $contact_us->name = $req->name;
+    //     $contact_us->email = $req->email;
+    //     $contact_us->mobile = $req->mobile;
+    //     $contact_us->comment = $req->comment;
+    //     $result = $contact_us->save(); 
+    //     if($result){
+    //         return redirect()->route("admin.contactUs")->with("success","Contact Us Successfully Updated.");
+    //     }
+
+    // }
+
+    // public function delete_contact_us($id){
+    //     $category = ContactUs::find($id);
+    //      $result = $contact_us->delete(); 
+    //     if($result){
+    //         return redirect()->route("admin.contactUs")->with("success","Contact Us Successfully Deleted.");
+    //     }
+    // }
+    // End Contact Us Method
 }

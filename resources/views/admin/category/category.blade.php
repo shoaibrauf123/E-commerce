@@ -5,12 +5,12 @@
 
         <div class="pagetitle">
             <h1 class="d-inline">Category</h1>
-
-
+        
             <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-sm float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          create
-        </button>
+            <button type="button" class="btn btn-primary btn-sm float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              create
+            </button>
+        </div>
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

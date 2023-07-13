@@ -31,5 +31,17 @@ Route::controller(AdminController::class)->prefix("admin")->group(function(){
 
     // categorires Route End
 
+    // Product Route Start
+        Route::get("product","product")->name("admin.product");
+        Route::get("product-form","product_form")->name("admin.productForm");
+    // Product Route End
+
+    // Contact Us Route Start 
+        Route::get("contact-us","contact_us")->name("admin.contactUs");
+        Route::get("delete-contactUs/{id}","delete_contact_us")->name("admin.deleteContactUs");
+        // Route::post("add-contact-us","add_contact_us")->name("admin.addContactUs");
+        // Route::post("update-contact-us/{id}","update_contact_us")->name("admin.updateContactUs");
+    // Contact Us Route End
+
 
 });

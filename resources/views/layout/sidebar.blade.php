@@ -22,7 +22,7 @@
         </a>
       </li><!-- End Categorie Nav -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="{{route('admin.product')}}">
           <i class="bi bi-bar-chart"></i>
           <span>Products</span>
         </a>
@@ -33,7 +33,14 @@
           <i class="bi bi-box-arrow-in-right"></i>
           <span>User Details</span>
         </a>
-      </li><!-- End Login Page Nav -->
+      </li><!-- End User Page Nav -->
+
+       <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('admin.contactUs')}}">
+          <i class="bi bi-box-arrow-in-right"></i>
+          <span>Contact Us</span>
+        </a>
+      </li><!-- End Contact Us Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('admin.logout') }}">
