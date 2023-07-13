@@ -29,7 +29,7 @@
       </li><!-- End Products Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="{{route('admin.users')}}">
           <i class="bi bi-box-arrow-in-right"></i>
           <span>User Details</span>
         </a>

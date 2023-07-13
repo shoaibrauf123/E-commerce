@@ -10,7 +10,7 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ContactUs;
-//use App\Models\Admin;
+use App\Models\Admin;
 
 
 class AdminController extends Controller
@@ -30,7 +30,7 @@ class AdminController extends Controller
         ]);
         $credentials = $req->only('email', 'password');
         
-        if(Auth::attempt($credentials)){
+        if(Auth::guard("admin")->attempt($credentials)){
            
             return redirect()->route("admin.home")->with("success","Loggin Successfully");
         }
@@ -271,4 +271,23 @@ class AdminController extends Controller
         }
     }
     // End Contact Us Method
+
+    // Start User Method
+
+    public function users(){
+        $user = User::orderBy("id","desc")->paginate(5);
+        return view("admin.user.user",[
+            "users"=>$user,
+        ]);
+    }
+
+    public function delete_user($id){
+        $user = User::find($id);
+         $result = $user->delete(); 
+        if($result){
+            return redirect()->route("admin.users")->with("success","User Successfully Deleted.");
+        }
+    }
+
+    // End User Method
 }
