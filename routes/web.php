@@ -34,6 +34,10 @@ Route::controller(AdminController::class)->prefix("admin")->group(function(){
     // Product Route Start
         Route::get("product","product")->name("admin.product");
         Route::get("product-form","product_form")->name("admin.productForm");
+        Route::post("add-product","add_product")->name("admin.addProduct");
+        Route::get("eidt-product-form/{id}","product_eidt_form")->name("admin.editProductForm");
+        Route::Post("update-product/{id}","product_update")->name("admin.updateProduct");
+        Route::get("delete-product/{id}","product_delete")->name("admin.deleteProduct");
     // Product Route End
 
     // Contact Us Route Start 

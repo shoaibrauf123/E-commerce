@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Product;
@@ -91,7 +92,8 @@ class AdminController extends Controller
     // Start Product Method
 
     public function product(){
-        $product = Product::paginate(5);
+        $product = Product::orderBy("id","desc")->paginate(5);
+      
         return view("admin.product.product",[
             "product" => $product,
         ]);
@@ -101,6 +103,117 @@ class AdminController extends Controller
         return view("admin.product.productForm",[
             "category" => $category,
         ]);
+    }
+    public function add_product(Request $req){
+        $req->validate([
+            "categories" => "required",
+            "product_name" => "required",
+            "product_price" => "required",
+            "product_mrp" => "required",
+            "product_qty" => "required",
+            "short_desc" => "required",
+            "description" => "required",
+            "meta_title" => "required",
+            "meta_desc" => "required",
+            "meta_keyword" => "required",
+            "product_image" => "required",
+            "product_status" => "required",
+        ]);
+
+        $product_image = null;
+        if(request()->hasfile('product_image')){
+            $product_image = time().'.'.request()->product_image->getClientOriginalExtension();
+            request()->product_image->move(public_path('assets/img/admin_product/'), $product_image);
+        }
+
+        $product = new Product;
+        $product->category_id_fk = $req->categories;
+        $product->product_name = $req->product_name;
+        $product->product_price = $req->product_price;
+        $product->product_mrp = $req->product_mrp;
+        $product->product_qty = $req->product_qty;
+        $product->product_image = $product_image;
+        $product->short_desc = $req->short_desc;
+        $product->description = $req->description;
+        $product->meta_title = $req->meta_title;
+        $product->meta_desc = $req->meta_desc;
+        $product->meta_keyword = $req->meta_keyword;
+        $product->status = $req->product_status;
+        $result = $product->save();
+        if($result){
+            return redirect()->route("admin.product")->with("success","Product Successfully Updated.");
+        }
+    }
+
+    public function product_eidt_form($id){
+        $category = Category::all();
+        $product = Product::find($id);
+        return view("admin.product.updateProductForm")
+                ->with("product",$product)
+                ->with("category",$category);
+    }
+
+    public function product_update(Request $req,$id){
+        $req->validate([
+            "categories" => "required",
+            "product_name" => "required",
+            "product_price" => "required",
+            "product_mrp" => "required",
+            "product_qty" => "required",
+            "short_desc" => "required",
+            "description" => "required",
+            "meta_title" => "required",
+            "meta_desc" => "required",
+            "meta_keyword" => "required",
+            "product_status" => "required",
+        ]);
+
+        $product = Product::find($id);
+
+        // Update Product image Code
+        if($req->hasFile('product_image'))
+        {
+            $destination = public_path("assets/img/admin_product/").$product->Product_image;
+            if(File::exists($destination))
+            {
+                File::delete($destination);
+            }
+            $file = $req->file('product_image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time(). '.' . $extension;
+            $file->move(public_path("assets/img/admin_product/"), $filename);
+        }
+
+        // Update product image Code End
+        
+        $product->category_id_fk = $req->categories;
+        $product->product_name = $req->product_name;
+        $product->product_price = $req->product_price;
+        $product->product_mrp = $req->product_mrp;
+        $product->product_qty = $req->product_qty;
+        if($req->product_image == ""){
+            $product_image = $product->product_image;
+            $product->product_image = $product_image;
+        }else{
+            $product->product_image = $filename;
+        }
+        $product->short_desc = $req->short_desc;
+        $product->description = $req->description;
+        $product->meta_title = $req->meta_title;
+        $product->meta_desc = $req->meta_desc;
+        $product->meta_keyword = $req->meta_keyword;
+        $product->status = $req->product_status;
+        $result = $product->update();
+        if($result){
+            return redirect()->route("admin.product")->with("success","Product Successfully Added.");
+        }
+    }
+    public function product_delete($id){
+        $product = Product::find($id);
+         $result = $product->delete(); 
+        if($result){
+            return redirect()->route("admin.product")->with("success","Product Successfully Deleted.");
+        }
     }
     // End Product Method
 
@@ -150,12 +263,12 @@ class AdminController extends Controller
 
     // }
 
-    // public function delete_contact_us($id){
-    //     $category = ContactUs::find($id);
-    //      $result = $contact_us->delete(); 
-    //     if($result){
-    //         return redirect()->route("admin.contactUs")->with("success","Contact Us Successfully Deleted.");
-    //     }
-    // }
+    public function delete_contact_us($id){
+        $contact_us = ContactUs::find($id);
+         $result = $contact_us->delete(); 
+        if($result){
+            return redirect()->route("admin.contactUs")->with("success","Contact Us Successfully Deleted.");
+        }
+    }
     // End Contact Us Method
 }
