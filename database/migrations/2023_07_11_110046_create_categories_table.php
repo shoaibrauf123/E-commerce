@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("cat_name",255);
             $table->float("status");
+            $table ->float("month_of_the_category");
             $table->timestamps();
         });
     }

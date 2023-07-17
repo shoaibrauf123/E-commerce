@@ -37,6 +37,15 @@
                                 </select>
                                 @error("status") <div class="text-danger"> {{$message}} </div> @enderror
                             </div>
+                            <div class="form-group">
+                                <label for="month_of_category">Month Of The Category</label>
+                                <select name="month_of_category" id="month_of_category" class="form-select">
+                                    <option>Select Month Of Category</option>
+                                    <option value="1">ON</option>
+                                    <option value="0">OFF</option>
+                                </select>
+                                @error("month_of_category") <div class="text-danger"> {{$message}} </div> @enderror
+                            </div>
                             <div class="form-group mt-2">
                                 <input type="submit" value="Create Category" class="btn btn-primary btn-sm">
                             </div>
@@ -58,6 +67,7 @@
                         <th>Id</th>
                         <th>Category Name</th>
                         <th>Status</th>
+                        <th>Month Of category</th>
                         <th>Date</th>
                         <th>Action</th>
                     </tr>
@@ -73,6 +83,13 @@
                                     {{'Active'}}
                                     @else
                                     {{'No Active'}}
+                                @endif 
+                            </td>
+                            <td>
+                                @if($item->month_of_the_category == 1)
+                                    {{'ON'}}
+                                    @else
+                                    {{'OFF'}}
                                 @endif 
                             </td>
                             <td>{{ $item->created_at }}</td>
@@ -102,6 +119,15 @@
                                                         <option value="0" {{$item->status == 0 ? "selected": ""}}>Not Active</option>
                                                     </select>
                                                     @error("status") <div class="text-danger"> {{$message}} </div> @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="month_of_category">Month Of The Category</label>
+                                                    <select name="month_of_category" id="month_of_category" class="form-select">
+                                                        <option>Select Month Of Category</option>
+                                                        <option value="1" {{$item->month_of_the_category == 1 ? "selected": ""}}>ON</option>
+                                                        <option value="0" {{$item->month_of_the_category == 0 ? "selected": ""}}>OFF</option>
+                                                    </select>
+                                                    @error("month_of_category") <div class="text-danger"> {{$message}} </div> @enderror
                                                 </div>
                                                 <div class="form-group mt-2">
                                                     <input type="submit" value="Update Category" class="btn btn-primary btn-sm">

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,4 +65,11 @@ Route::controller(AdminController::class)->prefix("admin")->group(function(){
         
 
     });  
+});
+
+Route::controller(HomeController::class)->group(function(){
+    Route::get("/","home")->name("home");
+    Route::get("contact_us","contact_us")->name("contact_us");
+    Route::get("product","product")->name("product");
+    Route::get("single-product","single_product")->name("single-product");
 });

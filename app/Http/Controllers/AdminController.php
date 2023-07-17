@@ -57,11 +57,13 @@ class AdminController extends Controller
         $req->validate([
             "cat_name" => "required",
             "status" => "required",
+            "month_of_category" => "required",
         ]);
 
         $category = new Category;
         $category->cat_name = $req->cat_name;
         $category->status = $req->status;
+        $category->month_of_the_category = $req->month_of_category;
         $result = $category->save();
         if($result){
             return redirect()->route("admin.category")->with("success","Category Successfully Added.");
@@ -71,10 +73,12 @@ class AdminController extends Controller
         $req->validate([
             "cat_name" => "required",
             "status" => "required",
+            "month_of_category" => "required",
         ]);
         $category = Category::find($id);
         $category->cat_name = $req->cat_name;
         $category->status = $req->status;
+        $category->month_of_the_category = $req->month_of_category;
         $result = $category->update();
         if($result){
             return redirect()->route("admin.category")->with("success","Category Successfully Updated.");
