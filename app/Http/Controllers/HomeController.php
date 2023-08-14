@@ -24,7 +24,11 @@ class HomeController extends Controller
         return view("contact_us");
     }
     public function product(){
-        return view("product");
+        $product = Product::orderBy("id","desc")->where("status","1")->paginate(10);
+
+        return view("product",[
+            "get_product" => $product,
+        ]);
     }
     public function category($id){
         $category = Category::orderBy("id","desc")->where("status",1)->where("month_of_the_category",1)->find($id)->products;
