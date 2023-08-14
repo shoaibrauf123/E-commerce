@@ -70,6 +70,19 @@ Route::controller(AdminController::class)->prefix("admin")->group(function(){
 Route::controller(HomeController::class)->group(function(){
     Route::get("/","home")->name("home");
     Route::get("contact_us","contact_us")->name("contact_us");
+    
+
+
+    // Start Category
+    Route::get("category/{id}","category")->name("category");
+    
+    // End Category
+
+    // start Product
     Route::get("product","product")->name("product");
     Route::get("single-product","single_product")->name("single-product");
+    // end Product
+
+
+
 });

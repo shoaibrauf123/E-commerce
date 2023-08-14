@@ -10,10 +10,14 @@ class HomeController extends Controller
 {
 
     public function home(){
-        $product = Product::orderBy("id","desc")->take(2)->get();
-        $month_of_the_category = Category::all();
+        $product = Product::orderBy("id","desc")->where("status",1)->take(2)->get();
+        $month_of_the_category = Category::orderBy("id","desc")
+        ->where("status",1)
+        ->where("month_of_the_category",1)->get();
+        
         return view("home",[
             "feature_product" => $product,
+            "month_of_the_category" => $month_of_the_category,
         ]);
     }
     public function contact_us(){
@@ -22,8 +26,9 @@ class HomeController extends Controller
     public function product(){
         return view("product");
     }
-
-    public function single_product(){
-        return view("single_product");
+    public function category($id){
+        $category = Category::orderBy("id","desc")->where("status",1)->where("month_of_the_category",1)->find($id)->products;
+        //dd($category);
+        return view("category");
     }
 }
