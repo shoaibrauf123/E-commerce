@@ -97,13 +97,17 @@
             </div>
         </div>
         <div class="row">
-            @foreach($month_of_the_category as $c_item)
-                <div class="col-12 col-md-4 p-5 mt-3">
-                    <a href="{{route('category',$c_item->id)}}"><img src="./assets/img/category_img_01.jpg" class="rounded-circle img-fluid border"></a>
-                    <h5 class="text-center mt-3 mb-3">{{$c_item->cate_name}}</h5>
-                    <p class="text-center"><a href="{{route('category',$c_item->id)}}" class="btn btn-success">Go To Product</a></p>
-                </div>
-            @endforeach
+            @if(count($month_of_the_category ) > 0)
+                @foreach($month_of_the_category as $c_item)
+                    <div class="col-12 col-md-4 p-5 mt-3">
+                        <a href="{{route('category',$c_item->id)}}"><img src="./assets/img/category_img_01.jpg" class="rounded-circle img-fluid border"></a>
+                        <h5 class="text-center mt-3 mb-3">{{$c_item->cate_name}}</h5>
+                        <p class="text-center"><a href="{{route('category',$c_item->id)}}" class="btn btn-success">Go To Product</a></p>
+                    </div>
+                @endforeach
+                @else
+                <p class="text-danger fw-bold fs-6">Not Record Found</p>
+            @endif
         </div>
     </section>
     <!-- End Categories of The Month -->
@@ -122,11 +126,11 @@
                 </div>
             </div>
             <div class="row">
-                @if($feature_product)
+                @if(count($feature_product) > 0)
                     @foreach($feature_product as $f_item)
                         <div class="col-12 col-md-4 mb-4">
                             <div class="card h-100">
-                                <a href="{{route('product')}}">
+                                <a href="{{route('single-product',$f_item->id)}}">
                                     <img src="{{asset('assets/img/admin_product/'.$f_item->product_image)}}" class="card-img-top" alt="...">
                                 </a>
                                 <div class="card-body">
@@ -143,6 +147,8 @@
                             </div>
                         </div>
                     @endforeach
+                    @else
+                        <p class="text-danger fw-bold fs-6">Not Record Found</p>
                 @endif   
 
                 

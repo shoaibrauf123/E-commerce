@@ -1,4 +1,5 @@
 @php
+
     $category = \App\Models\Category::where("status",1)->get();
 @endphp
     <!-- Start Top Nav -->
@@ -44,9 +45,6 @@
                                 <a class="nav-link" href="{{route('category',$cat_item->id)}}">{{$cat_item->cat_name}}</a>
                             </li>
                         @endforeach
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('product')}}">Product</a>
-                        </li>
                         <!-- <li class="nav-item">
                             <a class="nav-link" href="#"></a>
                         </li> -->
@@ -70,9 +68,13 @@
                     <a class="nav-icon position-relative text-decoration-none" href="#">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
-                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
-                    </a>
+                    @if(Auth::check())
+                                <a href="{{route('user-logout')}}" class="text-decoration-none fw-normal">Logout</a>
+                        @else
+                            <a class="nav-icon position-relative text-decoration-none" href="{{route('user-login-form')}}">
+                                <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                            </a>
+                    @endif
                 </div>
             </div>
 

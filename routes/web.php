@@ -70,7 +70,15 @@ Route::controller(AdminController::class)->prefix("admin")->group(function(){
 Route::controller(HomeController::class)->group(function(){
     Route::get("/","home")->name("home");
     Route::get("contact_us","contact_us")->name("contact_us");
+    Route::post("submit-contact-us","submit_contact_us")->name("submit_contact_us");
+
+    Route::get("user-register-form","user_register_form")->name("user-register-form");
+    Route::post("user-register","user_register")->name("user-register");
+    Route::get("user-login-form","user_login_form")->name("user-login-form");
+    Route::post("user-login","user_login")->name("user-login");
+    Route::get("user-logout","user_logout")->name("user-logout");
     
+
 
 
     // Start Category
@@ -79,8 +87,7 @@ Route::controller(HomeController::class)->group(function(){
     // End Category
 
     // start Product
-    Route::get("product","product")->name("product");
-    Route::get("single-product","single_product")->name("single-product");
+    Route::get("single-product/{id}","single_product")->name("single-product");
     // end Product
 
 
