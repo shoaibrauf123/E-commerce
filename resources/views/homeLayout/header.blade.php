@@ -67,7 +67,11 @@
                     </a>
                     <a class="nav-icon position-relative text-decoration-none" href="#">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                            
+                            @if(Session::has('cart'))
+                                <p id="cart-qty">
+                                     {{count(Session::get('cart'))}}                                       
+                                </p>
+                            @endif
                     </a>
                     @if(Auth::check())
                                 <a href="{{route('user-logout')}}" class="text-decoration-none fw-normal">Logout</a>
