@@ -1,3 +1,18 @@
 /*
 Custom Css
 */
+
+#cart-qty {
+	border-radius: 50%;
+	background: #dc3545;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	color: #fff;
+	font-size: 12px !important;
+	font-weight: 700 !important;
+	position: absolute;
+	top: 12px;
+	left: 8px;
+}

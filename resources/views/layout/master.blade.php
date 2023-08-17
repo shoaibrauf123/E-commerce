@@ -17,6 +17,7 @@
   <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
 </head>
 <body>
+
         @if(auth()->check())
             @include("layout.header")
             @include("layout.sidebar")

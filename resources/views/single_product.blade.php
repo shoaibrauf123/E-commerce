@@ -45,12 +45,10 @@
                                     </div>
                                 </div>
                                 <div class="row pb-3">
-                                    <div class="col d-grid">
-                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
+                                   <div class="col d-grid">
+                                        <a href="{{route('add-to-cart',$single_product->id)}}" class="btn btn-success btn-lg" >Add To Cart</a>
                                     </div>
-                                    <div class="col d-grid">
-                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard">Add To Cart</button>
-                                    </div>
+                                    
                                 </div>
                             </form>
 

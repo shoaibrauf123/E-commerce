@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AddToCartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,9 +79,6 @@ Route::controller(HomeController::class)->group(function(){
     Route::post("user-login","user_login")->name("user-login");
     Route::get("user-logout","user_logout")->name("user-logout");
     
-
-
-
     // Start Category
     Route::get("category/{id}","category")->name("category");
     
@@ -89,7 +87,12 @@ Route::controller(HomeController::class)->group(function(){
     // start Product
     Route::get("single-product/{id}","single_product")->name("single-product");
     // end Product
+});
 
+Route::controller(AddToCartController::class)->group(function(){
 
+    Route::get("cart/","cart")->name("cart");
+    Route::get("add-to-cart/{product}","add_to_cart")->name("add-to-cart");
+    Route::get('delete-cart-item/{id}','delete_cart_item')->name('delete-cart-item');
 
 });

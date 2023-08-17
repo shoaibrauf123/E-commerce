@@ -67,6 +67,7 @@
                     </a>
                     <a class="nav-icon position-relative text-decoration-none" href="#">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+                            
                     </a>
                     @if(Auth::check())
                                 <a href="{{route('user-logout')}}" class="text-decoration-none fw-normal">Logout</a>
