@@ -94,5 +94,7 @@ Route::controller(AddToCartController::class)->group(function(){
     Route::get("cart/","cart")->name("cart");
     Route::get("add-to-cart/{product}","add_to_cart")->name("add-to-cart");
     Route::get('delete-cart-item/{id}','delete_cart_item')->name('delete-cart-item');
+    Route::post('qty-update',"qty_update")->name("qty-update");
+    Route::get("checkout","checkout")->name("checkout");
 
 });

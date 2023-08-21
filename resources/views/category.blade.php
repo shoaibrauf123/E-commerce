@@ -21,7 +21,7 @@
                                         <p  class=" text-decoration-none text-truncate">{{$product_item->description}}</p>
                                         
                                         <p class="text-center mb-0 d-inline-block">Rs. {{$product_item->product_price}}</p>
-                                        <a href="#" class="btn btn-primary btn-sm text-white float-end fw-normal fs-6">Purchase</a>
+                                        <a href="{{route('add-to-cart',$product_item->id)}}" class="btn btn-primary btn-sm text-white float-end fw-normal fs-6">Add To Cart</a>
                                     </div>
                                 </div>
                             </div>

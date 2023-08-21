@@ -28,11 +28,11 @@ class AddToCartController extends Controller
             return redirect()->route("cart")->with("success","Added To Product");
         }
 
-        if(isset($cart[$product->id])){
-            $cart[$product->id]["qty"]++;
-            session()->put("cart",$cart);
-            return redirect()->route("cart")->with("success","Added To Product");
-        }
+        // if(isset($cart[$product->id])){
+        //     $cart[$product->id]["qty"]++;
+        //     session()->put("cart",$cart);
+        //     return redirect()->route("cart")->with("success","Added To Product");
+        // }
 
         $cart[$product->id] = [
             "name" => $product->product_name,
@@ -52,5 +52,21 @@ class AddToCartController extends Controller
             session()->put("cart",$cart);
         }
         return redirect()->route("cart")->with("success","Cart Item Successfully deleted.");
+    }
+    public function qty_update(Request $request){
+
+        $cart = session()->get('cart');
+    
+        if(isset($cart[$request->product_id])){
+
+            $cart[$request->product_id]['qty'] = $request->qty_id;
+            session()->put("cart",$cart);
+            return response()->json(["status"=>true]);
+        }
+       
+    }
+
+    public function checkout(){
+        return view("checkout");
     }
 }

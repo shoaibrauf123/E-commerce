@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 	<title>@yield("title")</title>
     
 	<link rel="apple-touch-icon" href="{{asset('assets/img/apple-icon.png')}}">
@@ -11,6 +12,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/templatemo.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
+    @stack("header-style")
 
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
