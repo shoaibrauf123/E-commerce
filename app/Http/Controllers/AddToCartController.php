@@ -27,13 +27,7 @@ class AddToCartController extends Controller
             session()->put("cart",$cart);
             return redirect()->route("cart")->with("success","Added To Product");
         }
-
-        // if(isset($cart[$product->id])){
-        //     $cart[$product->id]["qty"]++;
-        //     session()->put("cart",$cart);
-        //     return redirect()->route("cart")->with("success","Added To Product");
-        // }
-
+        
         $cart[$product->id] = [
             "name" => $product->product_name,
             "price" => $product->product_price,

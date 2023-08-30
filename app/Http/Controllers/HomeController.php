@@ -98,7 +98,7 @@ class HomeController extends Controller
         
         if(Auth::attempt($credentials)){
            
-            return redirect()->route("home")->with("success","Loggin Successfully");
+            return redirect()->route("checkout")->with("success","Loggin Successfully");
         }
         return redirect()->route("admin.loginForm")->with("error",'Oppes! You have entered invalid credentials');
 
