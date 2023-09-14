@@ -27,14 +27,16 @@ class HomeController extends Controller
     }
     public function user_register(Request $req){
         $req->validate([
-            "username" =>  "required",
-            "email" =>  "required|email|unique:users",
-            "password" =>  "required",
+            "username"      =>  "required",
+            "email"         =>  "required|email|unique:users",
+            "phone_number"  => "required",
+            "password"      =>  "required",
         ]);
 
         $user = new User();
         $user->username = $req->username;
         $user->email = $req->email;
+        $user->phone_number = $req->phone_number;
         $user->password = Hash::make($req->password);
         $result = $user->save();
         if($result){

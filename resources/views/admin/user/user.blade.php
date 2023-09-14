@@ -18,6 +18,7 @@
                         <th>Id</th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Phone Number</th>
                         <th>Date</th>
                         <th>Action</th>
                     </tr>
@@ -29,6 +30,7 @@
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->username }}</td>
                             <td>{{ $item->email }}</td> 
+                            <td>{{ $item->phone_number }}</td> 
                             <td>{{ $item->created_at }}</td>
                             <td><a href="{{route('admin.deleteUser',$item->id)}}" class="btn btn-danger btn-sm ms-2">Delete</a></td>
                         </tr>

@@ -46,140 +46,92 @@
 	        @if(Auth::check())
 		        <div class="card shadow-0 border">
 		          <div class="p-4">
-		            <h5 class="card-title mb-3">Guest checkout</h5>
-		            <div class="row">
-		              <div class="col-6 mb-3">
-		                <p class="mb-0">First name</p>
-		                <div class="form-outline">
-		                  <input type="text" id="typeText" placeholder="Type here" class="form-control" />
-		                </div>
-		              </div>
-
-		              <div class="col-6">
-		                <p class="mb-0">Last name</p>
-		                <div class="form-outline">
-		                  <input type="text" id="typeText" placeholder="Type here" class="form-control" />
-		                </div>
-		              </div>
-
-		              <div class="col-6 mb-3">
-		                <p class="mb-0">Phone</p>
-		                <div class="form-outline">
-		                  <input type="tel" id="typePhone" value="+48 " class="form-control" />
-		                </div>
-		              </div>
-
-		              <div class="col-6 mb-3">
-		                <p class="mb-0">Email</p>
-		                <div class="form-outline">
-		                  <input type="email" id="typeEmail" placeholder="example@gmail.com" class="form-control" />
-		                </div>
-		              </div>
-		            </div>
-
-		            <div class="form-check">
-		              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-		              <label class="form-check-label" for="flexCheckDefault">Keep me up to date on news</label>
-		            </div>
-
-		            <hr class="my-4" />
-
 		            <h5 class="card-title mb-3">Shipping info</h5>
+		            <form action="{{route('payment-order')}}" method="POST">
+		            	@csrf
+			            <div class="row">
+			            	@php $total = 0; @endphp
+		        				@if(Session::has("cart"))
+									@foreach(Session::get("cart") as $id => $cart_item)
+										@php 
+											$subTotal = $cart_item["price"] * $cart_item["qty"]; 
+											$total += $subTotal;
+										@endphp
+									@endforeach
+								@endif		
+				            <div class="col-sm-8 mb-3">
+				                <p class="mb-0">Address</p>
+				                <div class="form-outline">
+				                  	<input type="text" name="address" placeholder="Type here" class="form-control" />
+				                  	<input type="hidden" name="total_price" value="{{$total}}" class="form-control" />
+				                	@error('address')
+				                		<div class="text-danger">{{$message}}</div>
+				                	@enderror
+				                </div>
+				            </div>
+				            <div class="col-sm-4 mb-3">
+				                <p class="mb-0">State</p>
+				                <select class="form-select" name="state">
+					                <option value="punjab">Punjab</option>
+					                <option value="sarhad">Sarhad</option>
+					                <option value="sindh">Sindh</option>
+					                <option value="blochistan">Blochistan</option>
+				                  	@error('state')
+				                		<div class="text-danger">{{$message}}</div>
+				                	@enderror
+				                </select>
 
-		            <div class="row mb-3">
-		              <div class="col-lg-4 mb-3">
-		                <!-- Default checked radio -->
-		                <div class="form-check h-100 border rounded-3">
-		                  <div class="p-3">
-		                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked />
-		                    <label class="form-check-label" for="flexRadioDefault1">
-		                      Express delivery <br />
-		                      <small class="text-muted">3-4 days via Fedex </small>
-		                    </label>
-		                  </div>
-		                </div>
-		              </div>
-		              <div class="col-lg-4 mb-3">
-		                <!-- Default radio -->
-		                <div class="form-check h-100 border rounded-3">
-		                  <div class="p-3">
-		                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
-		                    <label class="form-check-label" for="flexRadioDefault2">
-		                      Post office <br />
-		                      <small class="text-muted">20-30 days via post </small>
-		                    </label>
-		                  </div>
-		                </div>
-		              </div>
-		              <div class="col-lg-4 mb-3">
-		                <!-- Default radio -->
-		                <div class="form-check h-100 border rounded-3">
-		                  <div class="p-3">
-		                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" />
-		                    <label class="form-check-label" for="flexRadioDefault3">
-		                      Self pick-up <br />
-		                      <small class="text-muted">Come to our shop </small>
-		                    </label>
-		                  </div>
-		                </div>
-		              </div>
-		            </div>
+				            </div>
 
-		            <div class="row">
-		              <div class="col-sm-8 mb-3">
-		                <p class="mb-0">Address</p>
-		                <div class="form-outline">
-		                  <input type="text" id="typeText" placeholder="Type here" class="form-control" />
-		                </div>
-		              </div>
+				            <div class="col-sm-4 mb-3">
+				                <p class="mb-0">City</p>
+				                <select class="form-select" name="city">
+					                <option value="lahore">Lahore</option>
+					                <option value="sheikhpura">Sheikhpura</option>
+					                <option value="sharkpur">Sharkpur</option>
+					                <option value="faisalabad">Faisalabad</option>
+					                @error('city')
+				                		<div class="text-danger">{{$message}}</div>
+				                	@enderror
+				                </select>
+				        	</div>
 
-		              <div class="col-sm-4 mb-3">
-		                <p class="mb-0">City</p>
-		                <select class="form-select">
-		                  <option value="1">New York</option>
-		                  <option value="2">Moscow</option>
-		                  <option value="3">Samarqand</option>
-		                </select>
-		              </div>
+				            <div class="col-sm-4 col-6 mb-3">
+				                <p class="mb-0">Postal code</p>
+				                <div class="form-outline">
+				                  	<input type="text" id="typeText" name="postal_code" class="form-control" />
+				                	@error('postal_code')
+				                		<div class="text-danger">{{$message}}</div>
+				                	@enderror
+				                </div>
+				            </div>
 
-		              <div class="col-sm-4 mb-3">
-		                <p class="mb-0">House</p>
-		                <div class="form-outline">
-		                  <input type="text" id="typeText" placeholder="Type here" class="form-control" />
-		                </div>
-		              </div>
+				            <div class="col-sm-4 col-6 mb-3">
+				                <p class="mb-0">Pin code</p>
+				                <div class="form-outline">
+				                  	<input type="text" id="typeText" name="pin_code" class="form-control" />
+				                	@error('pin_code')
+				                		<div class="text-danger">{{$message}}</div>
+				                	@enderror
+				                </div>
+				            </div>
+			            </div>
+			            <hr>
+			            <h5>Payment Information</h5>
+			            <div class="row">
+			            	<div class="col-md-12">
+			            		<div class="form-group">
+				            		<b>COD</b> <input type="radio" name="payment_type" id="" value="cod">
+				            		<b>Easy Pay</b> <input type="radio" sname="payment_type" id="" value="easy_pay">
+			            		</div>
+			            	</div>
+			            	<div class="col-md-12">
+			            		<input type="submit" value="Integration" class="btn btn-primary btn-sm float-end fw-bold fs-6">
+			            	</div>
 
-		              <div class="col-sm-4 col-6 mb-3">
-		                <p class="mb-0">Postal code</p>
-		                <div class="form-outline">
-		                  <input type="text" id="typeText" class="form-control" />
-		                </div>
-		              </div>
+			            </div>
 
-		              <div class="col-sm-4 col-6 mb-3">
-		                <p class="mb-0">Zip</p>
-		                <div class="form-outline">
-		                  <input type="text" id="typeText" class="form-control" />
-		                </div>
-		              </div>
-		            </div>
-
-		            <div class="form-check mb-3">
-		              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" />
-		              <label class="form-check-label" for="flexCheckDefault1">Save this address</label>
-		            </div>
-
-		            <div class="mb-3">
-		              <p class="mb-0">Message to seller</p>
-		              <div class="form-outline">
-		                <textarea class="form-control" id="textAreaExample1" rows="2"></textarea>
-		              </div>
-		            </div>
-
-		            <div class="float-end">
-		              <button class="btn btn-light border">Cancel</button>
-		              <button class="btn btn-success shadow-0 border">Continue</button>
-		            </div>
+			        </form>
 		          </div>
 		        </div>
 		    @endif

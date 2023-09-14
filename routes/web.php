@@ -96,5 +96,7 @@ Route::controller(AddToCartController::class)->group(function(){
     Route::get('delete-cart-item/{id}','delete_cart_item')->name('delete-cart-item');
     Route::post('qty-update',"qty_update")->name("qty-update");
     Route::get("checkout","checkout")->name("checkout");
+    Route::post('payment-order',"order_payment")->name('payment-order');
+    Route::get('order-placement',"order_placement")->name('order-placement');
 
 });

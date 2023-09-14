@@ -16,7 +16,6 @@ return new class extends Migration
             $table->unsignedBigInteger("user_id");
             $table->foreign("user_id")->references("id")->on("users");
             $table->string("address");
-            $table->string("country");
             $table->string("state");
             $table->string("city");
             $table->integer("postal_code");
