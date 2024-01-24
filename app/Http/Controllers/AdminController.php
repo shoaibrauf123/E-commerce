@@ -10,6 +10,9 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ContactUs;
+use App\Imports\CategoriesImport;
+use App\Exports\CategoriesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 use App\Models\Admin;
 
@@ -296,4 +299,18 @@ class AdminController extends Controller
     }
 
     // End User Method
+
+    // Import Method ///////////////////
+    public function import() 
+        {
+            Excel::import(new CategoriesImport,request()->file('file'));
+                
+            return redirect()->route('admin.category');
+        }
+    
+    // Export Method //////////////////
+    public function export() 
+    {
+        return Excel::download(new CategoriesExport, 'category.xlsx');
+    }
 }

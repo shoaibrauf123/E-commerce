@@ -10,7 +10,8 @@ use App\Models\Category;
 use App\Models\ContactUs;
 use App\Models\User;
 
-use App\CustomService\Custom_service;
+
+// use App\CustomService\Custom_service;
 
 class HomeController extends Controller
 {
@@ -120,4 +121,8 @@ class HomeController extends Controller
             "single_product" => $single_product,
         ]);
     }
+
+    
+
+
 }

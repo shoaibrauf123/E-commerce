@@ -37,6 +37,12 @@ Route::controller(AdminController::class)->prefix("admin")->group(function(){
         Route::post("update-category/{id}","update_category")->name("admin.updateCategory");
         Route::get("delete-category/{id}","delete_category")->name("admin.deleteCategory");
 
+        // import route
+        Route::post('category-import','import')->name('admin.cat-import');
+
+        // Export Route ///
+        Route::get('category-export', 'export')->name('admin.cat-export');
+
         // categorires Route End
 
         // Product Route Start
@@ -88,6 +94,7 @@ Route::controller(HomeController::class)->group(function(){
     // start Product
     Route::get("single-product/{id}","single_product")->name("single-product");
     // end Product
+
 });
 
 Route::controller(AddToCartController::class)->group(function(){

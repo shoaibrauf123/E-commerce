@@ -5,11 +5,21 @@
 
         <div class="pagetitle">
             <h1 class="d-inline">Category</h1>
-        
+
+
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary btn-sm float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
               create
             </button>
+            <form action="{{ route('admin.cat-import') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="file" name="file" class="form-control mt-3 ">
+                <br>
+                <button class="btn btn-outline-info btn-sm float-end mx-2 mb-2 ">Import Data</button>
+            </form>
+            <a href="{{ route('admin.cat-export') }}" class="btn btn-outline-secondary btn-sm float-end">
+            Export
+            </a>
         </div>
 
         <!-- Modal -->

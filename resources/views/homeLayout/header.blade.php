@@ -1,5 +1,4 @@
 @php
-
     $category = \App\Models\Category::where("status",1)->get();
 @endphp
     <!-- Start Top Nav -->
@@ -45,9 +44,6 @@
                                 <a class="nav-link" href="{{route('category',$cat_item->id)}}">{{$cat_item->cat_name}}</a>
                             </li>
                         @endforeach
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="#"></a>
-                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('contact_us')}}">Contact Us</a>
                         </li>
