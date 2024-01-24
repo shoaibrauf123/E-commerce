@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ContactUs;
+
 use App\Models\Admin;
 
 
@@ -59,6 +60,7 @@ class AdminController extends Controller
             "status" => "required",
             "month_of_category" => "required",
         ]);
+        
 
         $category = new Category;
         $category->cat_name = $req->cat_name;
